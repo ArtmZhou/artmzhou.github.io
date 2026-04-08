@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-date: 2026-04-09T10:00:00+08:00
+date: 2024-04-09T10:00:00+08:00
 draft: false
 tags: ["hugo", "blog"]
 categories: ["技术"]
