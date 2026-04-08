@@ -1,0 +1,100 @@
+baseURL: 'https://artmzhou.github.io/'
+languageCode: 'zh-cn'
+title: '我的博客'
+theme: 'PaperMod'
+
+pagination:
+  pagerSize: 5
+
+enableRobotsTXT: true
+enableGitInfo: true
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  title: '我的博客'
+  description: '个人技术博客，分享学习心得与技术文章'
+  keywords: [Blog, Tech, 技术博客]
+  author: 'artmzhou'
+
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: true
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  profileMode:
+    enabled: true
+    title: '我的博客'
+    subtitle: '个人技术博客，分享学习心得与技术文章'
+    imageUrl: ''
+    imageWidth: 120
+    imageHeight: 120
+    buttons:
+      - name: 文章
+        url: posts
+      - name: 标签
+        url: tags
+
+  homeInfoParams:
+    Title: '欢迎来到我的博客'
+    Content: '这里记录我的学习历程与技术分享'
+
+  socialIcons:
+    - name: github
+      url: 'https://github.com/artmzhou'
+
+menu:
+  main:
+    - identifier: home
+      name: 首页
+      url: /
+      weight: 10
+    - identifier: posts
+      name: 文章
+      url: /posts/
+      weight: 20
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 30
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 40
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 50
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
