@@ -60,6 +60,12 @@ params:
     - name: github
       url: 'https://github.com/artmzhou'
 
+  giscus:
+    repo: "artmzhou/artmzhou.github.io"
+    repoId: "YOUR_REPO_ID"
+    category: "Announcements"
+    categoryId: "YOUR_CATEGORY_ID"
+
 menu:
   main:
     - identifier: home
