@@ -62,9 +62,25 @@ params:
 
   giscus:
     repo: "artmzhou/artmzhou.github.io"
-    repoId: "YOUR_REPO_ID"
+    repoId: "R_kgDOOiMLTA"
     category: "Announcements"
-    categoryId: "YOUR_CATEGORY_ID"
+    categoryId: "DIC_kwDOOiMLTM4C6Y9f"
+    mapping: "pathname"
+    strict: 0
+    reactionsEnabled: 1
+    emitMetadata: 0
+    inputPosition: "bottom"
+    theme: "preferred_color_scheme"
+    lang: "zh-CN"
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
 
 menu:
   main:
@@ -94,13 +110,3 @@ outputs:
     - HTML
     - RSS
     - JSON
-
-params:
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    keys: ["title", "permalink", "summary", "content"]
