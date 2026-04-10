@@ -2,8 +2,8 @@
 title: "Hello World"
 date: 2024-04-09T10:00:00+08:00
 draft: false
-tags: ["hugo", "blog"]
-categories: ["技术"]
+tags: ["hugo", "blog", "draft"]
+categories: ["草稿"]
 summary: "第一篇博客文章，测试 Hugo + PaperMod 部署"
 ---
 
