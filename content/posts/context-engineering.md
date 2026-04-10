@@ -108,8 +108,6 @@ if token_count > THRESHOLD:
 
 ### 4.1 技术模式
 
-![上下文隔离架构](https://github.com/user-attachments/assets/703d4bfe-c44c-491d-a1ec-6aae5b691e80)
-
 #### Sub-Agent 模式
 
 - **定义**: 主 Agent 调用子 Agent 完成特定任务
