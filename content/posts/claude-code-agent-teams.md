@@ -25,7 +25,7 @@ Agent Teams的模型不复杂，三个关键词就能概括：团队、任务、
 
 一个典型的流程大概是这样的：
 
-```
+```txt
 1. TeamCreate 创建团队
 2. TaskCreate 拆分任务，设置依赖关系
 3. Agent 派生子agent，分配到团队
@@ -37,7 +37,7 @@ Agent Teams的模型不复杂，三个关键词就能概括：团队、任务、
 
 实际在Claude Code里用起来，对话大概长这样：
 
-```
+```txt
 你：帮我重构 auth、payment、notification 三个模块
 
 Claude Code：
@@ -62,7 +62,7 @@ Claude Code：
 
 加个新功能，前端改组件后端加API，接口约定好了其实没啥依赖：
 
-```
+```txt
 TaskCreate("实现后端API /api/users/export")
 TaskCreate("实现前端导出按钮和下载逻辑")
 → 两个agent同时开工
@@ -80,7 +80,7 @@ TaskCreate("实现前端导出按钮和下载逻辑")
 
 Claude Code随即开始组建团队：
 
-```
+```txt
 → TeamCreate("blog-agent-teams")
 → TaskCreate("撰写博客初稿")           # 任务1，分配给writer
 → TaskCreate("审核并去除AI味道")        # 任务2，分配给reviewer
@@ -102,7 +102,7 @@ Claude Code随即开始组建团队：
 
 没办法，team lead自己上手写了初稿。然后派出reviewer agent来审核：
 
-```
+```txt
 → TaskUpdate(task1, status="completed")
 → Agent("reviewer", 负责审核润色)
 ```
