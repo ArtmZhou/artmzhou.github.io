@@ -1,6 +1,6 @@
 baseURL: 'https://artmzhou.github.io/'
 languageCode: 'zh-cn'
-title: '我的博客'
+title: "artmzhou"
 theme: 'PaperMod'
 
 pagination:
@@ -15,10 +15,13 @@ minify:
 
 params:
   env: production
-  title: '我的博客'
+  title: 'embers,welcome to my world!'
   description: '个人技术博客，分享学习心得与技术文章'
   keywords: [Blog, Tech, 技术博客]
   author: 'artmzhou'
+
+  assets:
+    favicon: /favicon/favicon.ico
 
   defaultTheme: auto
   disableThemeToggle: false
@@ -41,16 +44,16 @@ params:
 
   profileMode:
     enabled: true
-    title: '我的博客'
-    subtitle: '个人技术博客，分享学习心得与技术文章'
+    title: 'embers, welcome to my world!'
+    subtitle: 'enjoy yourself!'
     imageUrl: ''
     imageWidth: 120
     imageHeight: 120
     buttons:
-      - name: 文章
+      - name: articles
         url: posts
-      - name: 标签
-        url: tags
+      - name: search
+        url: search  
 
   homeInfoParams:
     Title: '欢迎来到我的博客'
