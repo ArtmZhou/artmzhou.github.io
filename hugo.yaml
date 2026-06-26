@@ -1,6 +1,6 @@
 baseURL: 'https://artmzhou.github.io/'
 languageCode: 'zh-cn'
-title: "artmzhou"
+title: 'artmzhou'
 theme: 'PaperMod'
 
 pagination:
@@ -15,15 +15,20 @@ minify:
 
 params:
   env: production
-  title: 'embers,welcome to my world!'
-  description: '个人技术博客，分享学习心得与技术文章'
-  keywords: [Blog, Tech, 技术博客]
+  title: 'artmzhou'
+  description: '个人技术博客，记录 AI Agent、RAG、Claude Code、模型微调与工程化实践。'
+  keywords: [Blog, Tech, AI, Agent, RAG, Claude Code, Hugo]
   author: 'artmzhou'
 
   assets:
     favicon: /favicon/favicon.ico
+    theme_color: '#ece4d9'
+    msapplication_TileColor: '#ece4d9'
 
-  defaultTheme: auto
+  label:
+    text: 'artmzhou'
+
+  defaultTheme: light
   disableThemeToggle: false
 
   ShowReadingTime: true
@@ -43,38 +48,102 @@ params:
   tocopen: false
 
   profileMode:
-    enabled: true
-    title: 'embers, welcome to my world!'
-    subtitle: 'enjoy yourself!'
-    imageUrl: ''
-    imageWidth: 120
-    imageHeight: 120
-    buttons:
-      - name: articles
-        url: posts
-      - name: search
-        url: search  
+    enabled: false
 
-  homeInfoParams:
-    Title: '欢迎来到我的博客'
-    Content: '这里记录我的学习历程与技术分享'
+  home:
+    brandMark: 'A'
+    hero:
+      eyebrow: 'AI Engineering Notes'
+      title: '与 AI 共建的工程化笔记'
+      accent: '从想法，到可运行系统。'
+      subtitle: '这里记录我围绕 AI Agent、RAG、Claude Code、模型微调和工程化交付的学习、实验与复盘。'
+      primary:
+        label: '读最新文章'
+        url: '/posts/'
+      secondary:
+        label: '看专题 / 作品'
+        url: '/#projects'
+      roles:
+        - 'AI Agent'
+        - 'RAG'
+        - 'Claude Code'
+        - 'Engineering Notes'
+    about:
+      eyebrow: '关于我'
+      title: '把 AI 当作工程伙伴，而不是魔法按钮。'
+      body:
+        - '我在这个站点里整理自己对 AI 工程化的观察：如何拆解任务、管理上下文、组织 Agent 协作，以及把模型能力落到真实开发流程里。'
+        - '文章会偏实践，保留踩坑过程、配置细节和复盘，而不是只留下顺滑的结论。'
+    skills:
+      eyebrow: '能力地图'
+      title: '正在系统化练习的几件事。'
+      description: '这些方向来自现有文章，也会决定之后站点内容的组织方式。'
+      items:
+        - name: 'AI Agent'
+          note: 'ReAct、Plan-and-Execute、Reflection 与多 Agent 协作。'
+        - name: 'RAG / 向量检索'
+          note: '数据准备、语义分块、向量数据库和检索链路。'
+        - name: 'Claude Code 工作流'
+          note: 'Vibe Coding、Skills、Agent Teams 与上下文工程。'
+        - name: '模型微调与工程化'
+          note: '从 LLaMA-Factory 体验到训练、评估和交付记录。'
+    projects:
+      eyebrow: '专题 / 作品'
+      title: '把文章整理成可继续生长的主题。'
+      description: '先用现有文章搭出专题入口，后续可以逐步长成项目页、工具箱或教程。'
+      items:
+        - title: 'RAG 系列'
+          type: '专题'
+          description: '从数据准备到 SemanticChunker、向量数据库，记录一条 RAG 系统的基础链路。'
+          url: '/tags/rag/'
+          tags: ['RAG', 'Embedding', 'Vector DB']
+        - title: 'Claude Code 工作流'
+          type: '实践'
+          description: '围绕 Vibe Coding、Superpowers、Skills 和 Agent Teams，探索 AI 编程协作方式。'
+          url: '/tags/claude-code/'
+          tags: ['Claude Code', 'Skills', 'Workflow']
+        - title: 'Agent 范式'
+          type: '笔记'
+          description: '梳理 ReAct、Plan-and-Execute、Reflection 等 Agent 模式，以及它们的工程取舍。'
+          url: '/posts/agent%E8%8C%83%E5%BC%8F/'
+          tags: ['Agent', 'LLM', 'Pattern']
+    toolbox:
+      eyebrow: '工具箱 / 实验'
+      title: '把零散实验收进抽屉。'
+      description: '这个区域先作为入口预留，之后可以放 prompt、workflow、skills、demo 和可复用脚手架。'
+      items:
+        - name: 'Prompt Notes'
+          description: '沉淀提示词、系统提示和上下文组织方式。'
+        - name: 'Workflow Lab'
+          description: '记录可复用的 AI 开发流程和检查清单。'
+    contact:
+      eyebrow: '联系'
+      title: '继续写，慢慢把地图补全。'
+      description: '欢迎从文章、归档或 GitHub 进入不同路径。'
+      links:
+        - label: 'GitHub'
+          url: 'https://github.com/artmzhou'
+        - label: 'RSS'
+          url: '/index.xml'
+        - label: '搜索'
+          url: '/search/'
 
   socialIcons:
     - name: github
       url: 'https://github.com/artmzhou'
 
   giscus:
-    repo: "artmzhou/artmzhou.github.io"
-    repoId: "R_kgDOOiMLTA"
-    category: "Announcements"
-    categoryId: "DIC_kwDOOiMLTM4C6Y9f"
-    mapping: "pathname"
+    repo: 'artmzhou/artmzhou.github.io'
+    repoId: 'R_kgDOOiMLTA'
+    category: 'Announcements'
+    categoryId: 'DIC_kwDOOiMLTM4C6Y9f'
+    mapping: 'pathname'
     strict: 0
     reactionsEnabled: 1
     emitMetadata: 0
-    inputPosition: "bottom"
-    theme: "preferred_color_scheme"
-    lang: "zh-CN"
+    inputPosition: 'bottom'
+    theme: 'preferred_color_scheme'
+    lang: 'zh-CN'
 
   fuseOpts:
     isCaseSensitive: false
@@ -83,7 +152,7 @@ params:
     distance: 1000
     threshold: 0.4
     minMatchCharLength: 0
-    keys: ["title", "permalink", "summary", "content"]
+    keys: ['title', 'permalink', 'summary', 'content']
 
 menu:
   main:
@@ -95,18 +164,26 @@ menu:
       name: 文章
       url: /posts/
       weight: 20
+    - identifier: projects
+      name: 专题
+      url: /#projects
+      weight: 30
     - identifier: archives
       name: 归档
       url: /archives/
-      weight: 30
+      weight: 40
     - identifier: search
       name: 搜索
       url: /search/
-      weight: 40
+      weight: 50
     - identifier: tags
       name: 标签
       url: /tags/
-      weight: 50
+      weight: 60
+    - identifier: github
+      name: GitHub
+      url: https://github.com/artmzhou
+      weight: 70
 
 outputs:
   home:
