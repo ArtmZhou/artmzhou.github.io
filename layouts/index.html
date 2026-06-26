@@ -101,6 +101,11 @@
       <div class="brand-project-grid">
         {{ range index $projects "items" }}
         <a class="brand-project" href="{{ index . "url" | relLangURL }}">
+          {{ with index . "image" }}
+          <figure class="brand-project-media">
+            <img src="{{ . | relURL }}" alt="" loading="lazy">
+          </figure>
+          {{ end }}
           <span>{{ index . "type" }}</span>
           <h3>{{ index . "title" }}</h3>
           <p>{{ index . "description" }}</p>

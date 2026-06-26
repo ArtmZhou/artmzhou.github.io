@@ -96,16 +96,19 @@ params:
           type: '专题'
           description: '从数据准备到 SemanticChunker、向量数据库，记录一条 RAG 系统的基础链路。'
           url: '/tags/rag/'
+          image: '/images/deepseek_mermaid_20260518_1f90d3.png'
           tags: ['RAG', 'Embedding', 'Vector DB']
         - title: 'Claude Code 工作流'
           type: '实践'
           description: '围绕 Vibe Coding、Superpowers、Skills 和 Agent Teams，探索 AI 编程协作方式。'
           url: '/tags/claude-code/'
+          image: '/images/agent-teams-setup.png'
           tags: ['Claude Code', 'Skills', 'Workflow']
         - title: 'Agent 范式'
           type: '笔记'
           description: '梳理 ReAct、Plan-and-Execute、Reflection 等 Agent 模式，以及它们的工程取舍。'
           url: '/posts/agent%E8%8C%83%E5%BC%8F/'
+          image: '/images/img_1.png'
           tags: ['Agent', 'LLM', 'Pattern']
     toolbox:
       eyebrow: '工具箱 / 实验'

@@ -61,8 +61,13 @@ $archivesPath = Join-Path $Root 'public/archives/index.html'
 $searchPath = Join-Path $Root 'public/search/index.html'
 $tagsPath = Join-Path $Root 'public/tags/index.html'
 $postPath = Join-Path $Root 'public/posts/claude-code-agent-teams/index.html'
+$tocPostDir = Get-ChildItem (Join-Path $Root 'public/posts') -Directory | Where-Object { $_.Name -like 'agent*' } | Select-Object -First 1
+if (-not $tocPostDir) {
+  throw 'Expected generated Agent article directory missing.'
+}
+$tocPostPath = Join-Path $tocPostDir.FullName 'index.html'
 
-foreach ($path in @($indexPath, $postsPath, $archivesPath, $searchPath, $tagsPath, $postPath)) {
+foreach ($path in @($indexPath, $postsPath, $archivesPath, $searchPath, $tagsPath, $postPath, $tocPostPath)) {
   if (-not (Test-Path $path)) {
     throw "Expected generated file missing: $path"
   }
@@ -70,6 +75,7 @@ foreach ($path in @($indexPath, $postsPath, $archivesPath, $searchPath, $tagsPat
 
 $index = Get-Content -Raw -Encoding UTF8 $indexPath
 $post = Get-Content -Raw -Encoding UTF8 $postPath
+$tocPost = Get-Content -Raw -Encoding UTF8 $tocPostPath
 
 Assert-Contains $index 'class=brand-home' 'custom home wrapper'
 Assert-Matches $index '\u4E0E AI \u5171\u5EFA\u7684\u5DE5\u7A0B\u5316\u7B14\u8BB0' 'hero headline'
@@ -87,5 +93,6 @@ Assert-NotMatches $index '\u68E3\u682D' 'garbled home navigation'
 Assert-NotMatches $index '\u6D93' 'garbled Chinese description'
 Assert-Contains $post 'giscus.app/client.js' 'Giscus comments'
 Assert-Contains $post 'Claude Code Agent Teams' 'existing article page'
+Assert-Contains $tocPost 'Table of Contents' 'article table of contents'
 
 Write-Host 'Redesign verification passed.'
