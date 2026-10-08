@@ -1,29 +1,58 @@
 {{ define "main" }}
-{{- $posts := where site.RegularPages "Section" "posts" -}}
-<div class="notes-home">
-  <section class="notes-intro" aria-labelledby="intro-title">
-    <p class="notes-kicker">ARTMZHOU / ENGINEERING NOTES</p>
-    <h1 id="intro-title">把实践写下来，<br>让经验有迹可循。</h1>
-    <p class="notes-lede">记录 AI 工程与 Ascend C 算子开发。整理实验过程、实现细节和遇到的问题，积累可回看的技术笔记。</p>
-    <div class="notes-actions"><a class="notes-button" href="{{ "/posts/" | relURL }}">浏览全部文章 <span aria-hidden="true">→</span></a><a href="{{ "/search/" | relURL }}">搜索笔记</a></div>
-    <p class="notes-count">{{ len $posts }} 篇笔记 · 持续更新</p>
-  </section>
-  <section class="notes-section" id="projects" aria-labelledby="topics-title">
-    <div class="notes-heading"><h2 id="topics-title">按专题阅读</h2><a href="{{ "/tags/" | relURL }}">全部标签 →</a></div>
-    <div class="notes-topics">
-      {{ range site.Params.home.projects.items }}
-      <a class="notes-topic" href="{{ .url | relURL }}"><span class="notes-kicker">{{ .type }}</span><h3>{{ .title }} <span aria-hidden="true">↗</span></h3><p>{{ .description }}</p></a>
-      {{ end }}
+{{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+<div class="journal-home">
+  <header class="journal-intro">
+    <div>
+      <p class="eyebrow">ARTMZHOU'S JOURNAL <span>工程 · 实践 · 思考</span></p>
+      <h1>在实践中探索，<br>在记录中沉淀。</h1>
     </div>
-  </section>
-  <section class="notes-section" aria-labelledby="latest-title">
-    <div class="notes-heading"><h2 id="latest-title">最近更新</h2><a href="{{ "/archives/" | relURL }}">时间归档 →</a></div>
-    <div class="notes-list">
-      {{ range first 6 $posts.ByDate.Reverse }}
-      <article class="notes-row"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time><div><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 108 }}{{ end }}</p></div></article>
-      {{ end }}
+    <div class="journal-intro-note">
+      <p>关于 AI 工程与算子开发的个人笔记。<br>记录实现的细节，也留下思考的过程。</p>
+      <span>{{ len $posts }} 篇文章 <i aria-hidden="true">/</i> 持续书写中</span>
     </div>
-  </section>
-  <aside class="notes-about"><strong>关于这本笔记</strong><p>关注 AI Agent、RAG、模型微调与算子开发。保留实践细节，也记录问题与复盘。</p><a href="https://github.com/artmzhou">GitHub ↗</a><a href="{{ "/index.xml" | relURL }}">RSS 订阅 ↗</a></aside>
+  </header>
+  <div class="journal-columns">
+    <section class="journal-feed" aria-labelledby="latest-title">
+      <div class="section-label"><h2 id="latest-title">最近的记录</h2><span>THE LATEST</span></div>
+      {{ range first 1 $posts }}
+      <article class="journal-feature">
+        <div class="article-meta"><span class="feature-label">最新文章</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></div>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 120 }}{{ end }}</p>
+        <a class="read-link" href="{{ .RelPermalink }}">阅读这篇笔记 <span aria-hidden="true">↗</span></a>
+      </article>
+      {{ end }}
+      <div class="journal-list">
+        {{ range first 5 (after 1 $posts) }}
+        <article class="journal-entry">
+          <div class="article-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>{{ with .Params.tags }}<span>{{ index . 0 }}</span>{{ end }}</div>
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 100 }}{{ end }}</p>
+        </article>
+        {{ end }}
+      </div>
+      <a class="all-notes" href="{{ "/posts/" | relURL }}">浏览全部文章 <span aria-hidden="true">→</span></a>
+    </section>
+    <aside class="journal-sidebar">
+      <section id="projects" aria-labelledby="topics-title">
+        <div class="section-label"><h2 id="topics-title">阅读专题</h2><span>TOPICS</span></div>
+        <div class="journal-topics">
+          {{ range $index, $topic := site.Params.home.projects.items }}
+          <a class="journal-topic" href="{{ .url | relURL }}">
+            <span class="topic-number">{{ printf "%02d" (add $index 1) }}</span>
+            <div><h3>{{ .title }} <span aria-hidden="true">↗</span></h3><p>{{ .description }}</p></div>
+          </a>
+          {{ end }}
+        </div>
+        <a class="quiet-link" href="{{ "/tags/" | relURL }}">按标签探索 →</a>
+      </section>
+      <section class="journal-about" aria-labelledby="about-title">
+        <span class="about-mark" aria-hidden="true">a.</span>
+        <h2 id="about-title">你好，我是 artmzhou。</h2>
+        <p>在这里整理学习与实践。<br>希望每一篇笔记，都能成为下次出发的参考。</p>
+        <div><a href="https://github.com/artmzhou">GitHub ↗</a><a href="{{ "/index.xml" | relURL }}">RSS 订阅 ↗</a></div>
+      </section>
+    </aside>
+  </div>
 </div>
 {{ end }}

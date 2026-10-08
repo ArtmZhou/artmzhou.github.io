@@ -24,9 +24,13 @@
 
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
-  {{- if (.Param "ShowToc") }}
-  {{- partial "toc.html" . }}
+  <div class="reading-layout">
+  {{- if and (.Param "ShowToc") (gt (len .Fragments.Headings) 0) }}
+  <aside class="reading-toc" aria-label="文章目录">
+    {{- partial "toc.html" . }}
+  </aside>
   {{- end }}
+  <div class="reading-body">
 
   {{- if .Content }}
   <div class="post-content md-content">
@@ -37,6 +41,9 @@
     {{ end }}
   </div>
   {{- end }}
+
+  </div>
+  </div>
 
   <footer class="post-footer">
     {{- if .Params.tags }}

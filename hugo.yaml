@@ -25,8 +25,8 @@ params:
 
   assets:
     favicon: /favicon/favicon.ico
-    theme_color: '#f7f9fc'
-    msapplication_TileColor: '#f7f9fc'
+    theme_color: '#f9f8f5'
+    msapplication_TileColor: '#f9f8f5'
 
   label:
     text: 'artmzhou'
@@ -179,10 +179,6 @@ menu:
       name: 专题
       url: /#projects
       weight: 30
-    - identifier: ascend-c
-      name: Ascend C
-      url: /tags/ascend-c/
-      weight: 35
     - identifier: archives
       name: 归档
       url: /archives/
@@ -191,14 +187,6 @@ menu:
       name: 搜索
       url: /search/
       weight: 50
-    - identifier: tags
-      name: 标签
-      url: /tags/
-      weight: 60
-    - identifier: github
-      name: GitHub
-      url: https://github.com/artmzhou
-      weight: 70
 
 outputs:
   home:
