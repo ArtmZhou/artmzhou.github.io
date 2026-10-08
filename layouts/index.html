@@ -1,185 +1,29 @@
 {{ define "main" }}
-{{- $home := site.Params.home -}}
-{{- $hero := index $home "hero" -}}
-{{- $about := index $home "about" -}}
-{{- $skills := index $home "skills" -}}
-{{- $projects := index $home "projects" -}}
-{{- $toolbox := index $home "toolbox" -}}
-{{- $contact := index $home "contact" -}}
 {{- $posts := where site.RegularPages "Section" "posts" -}}
-
-<div class="brand-home">
-  <section class="brand-hero" aria-labelledby="brand-hero-title">
-    <div class="brand-wrap brand-hero-grid">
-      <div class="brand-hero-copy">
-        <p class="brand-eyebrow">{{ index $hero "eyebrow" | default "Notes" }}</p>
-        <h1 id="brand-hero-title">
-          {{ index $hero "title" | default site.Title }}
-          <span>{{ index $hero "accent" | default site.Params.description }}</span>
-        </h1>
-        <p class="brand-lede">{{ index $hero "subtitle" | default site.Params.description }}</p>
-        {{ with index $hero "roles" }}
-        <div class="brand-roles" aria-label="内容方向">
-          {{ range . }}
-          <span>{{ . }}</span>
-          {{ end }}
-        </div>
-        {{ end }}
-        <div class="brand-actions">
-          {{ with index $hero "primary" }}
-          <a class="brand-button brand-button-primary" href="{{ index . "url" | relLangURL }}">{{ index . "label" }}</a>
-          {{ end }}
-          {{ with index $hero "secondary" }}
-          <a class="brand-button brand-button-ghost" href="{{ index . "url" | relLangURL }}">{{ index . "label" }}</a>
-          {{ end }}
-        </div>
-      </div>
-      <aside class="brand-hero-panel" aria-label="站点概览">
-        <div class="brand-mark">{{ index $home "brandMark" | default "A" }}</div>
-        <p>Engineering notes for AI builders.</p>
-        <dl>
-          <div>
-            <dt>文章</dt>
-            <dd>{{ len $posts }}</dd>
-          </div>
-          <div>
-            <dt>专题</dt>
-            <dd>{{ len (index $projects "items") }}</dd>
-          </div>
-          <div>
-            <dt>方向</dt>
-            <dd>{{ len (index $skills "items") }}</dd>
-          </div>
-        </dl>
-      </aside>
+<div class="notes-home">
+  <section class="notes-intro" aria-labelledby="intro-title">
+    <p class="notes-kicker">ARTMZHOU / ENGINEERING NOTES</p>
+    <h1 id="intro-title">把实践写下来，<br>让经验有迹可循。</h1>
+    <p class="notes-lede">记录 AI 工程与 Ascend C 算子开发。整理实验过程、实现细节和遇到的问题，积累可回看的技术笔记。</p>
+    <div class="notes-actions"><a class="notes-button" href="{{ "/posts/" | relURL }}">浏览全部文章 <span aria-hidden="true">→</span></a><a href="{{ "/search/" | relURL }}">搜索笔记</a></div>
+    <p class="notes-count">{{ len $posts }} 篇笔记 · 持续更新</p>
+  </section>
+  <section class="notes-section" id="projects" aria-labelledby="topics-title">
+    <div class="notes-heading"><h2 id="topics-title">按专题阅读</h2><a href="{{ "/tags/" | relURL }}">全部标签 →</a></div>
+    <div class="notes-topics">
+      {{ range site.Params.home.projects.items }}
+      <a class="notes-topic" href="{{ .url | relURL }}"><span class="notes-kicker">{{ .type }}</span><h3>{{ .title }} <span aria-hidden="true">↗</span></h3><p>{{ .description }}</p></a>
+      {{ end }}
     </div>
   </section>
-
-  <section class="brand-section brand-about" aria-labelledby="brand-about-title">
-    <div class="brand-wrap brand-two-col">
-      <div>
-        <p class="brand-eyebrow">{{ index $about "eyebrow" }}</p>
-        <h2 id="brand-about-title">{{ index $about "title" }}</h2>
-      </div>
-      <div class="brand-prose">
-        {{ range index $about "body" }}
-        <p>{{ . }}</p>
-        {{ end }}
-      </div>
+  <section class="notes-section" aria-labelledby="latest-title">
+    <div class="notes-heading"><h2 id="latest-title">最近更新</h2><a href="{{ "/archives/" | relURL }}">时间归档 →</a></div>
+    <div class="notes-list">
+      {{ range first 6 $posts.ByDate.Reverse }}
+      <article class="notes-row"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time><div><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 108 }}{{ end }}</p></div></article>
+      {{ end }}
     </div>
   </section>
-
-  <section class="brand-section" aria-labelledby="brand-skills-title">
-    <div class="brand-wrap">
-      <div class="brand-section-head">
-        <div>
-          <p class="brand-eyebrow">{{ index $skills "eyebrow" }}</p>
-          <h2 id="brand-skills-title">{{ index $skills "title" }}</h2>
-        </div>
-        <p>{{ index $skills "description" }}</p>
-      </div>
-      <div class="brand-card-grid">
-        {{ range index $skills "items" }}
-        <article class="brand-card">
-          <h3>{{ index . "name" }}</h3>
-          <p>{{ index . "note" }}</p>
-        </article>
-        {{ end }}
-      </div>
-    </div>
-  </section>
-
-  <section class="brand-section brand-projects" id="projects" aria-labelledby="brand-projects-title">
-    <div class="brand-wrap">
-      <div class="brand-section-head">
-        <div>
-          <p class="brand-eyebrow">{{ index $projects "eyebrow" }}</p>
-          <h2 id="brand-projects-title">{{ index $projects "title" }}</h2>
-        </div>
-        <p>{{ index $projects "description" }}</p>
-      </div>
-      <div class="brand-project-grid">
-        {{ range index $projects "items" }}
-        <a class="brand-project" href="{{ index . "url" | relLangURL }}">
-          {{ with index . "image" }}
-          <figure class="brand-project-media">
-            <img src="{{ . | relURL }}" alt="" loading="lazy">
-          </figure>
-          {{ end }}
-          <span>{{ index . "type" }}</span>
-          <h3>{{ index . "title" }}</h3>
-          <p>{{ index . "description" }}</p>
-          {{ with index . "tags" }}
-          <div class="brand-tags">
-            {{ range . }}
-            <b>{{ . }}</b>
-            {{ end }}
-          </div>
-          {{ end }}
-        </a>
-        {{ end }}
-      </div>
-    </div>
-  </section>
-
-  <section class="brand-section" aria-labelledby="brand-latest-title">
-    <div class="brand-wrap">
-      <div class="brand-section-head">
-        <div>
-          <p class="brand-eyebrow">Blog</p>
-          <h2 id="brand-latest-title">最新文章</h2>
-        </div>
-        <a class="brand-text-link" href="{{ "/posts/" | relLangURL }}">查看全部文章</a>
-      </div>
-      <div class="brand-article-list">
-        {{ range first 5 $posts.ByDate.Reverse }}
-        <a class="brand-article" href="{{ .RelPermalink }}">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-          <div>
-            <h3>{{ .Title }}</h3>
-            <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 108 }}{{ end }}</p>
-          </div>
-          {{ with index .Params.categories 0 }}
-          <span>{{ . }}</span>
-          {{ end }}
-        </a>
-        {{ end }}
-      </div>
-    </div>
-  </section>
-
-  <section class="brand-section brand-toolbox" aria-labelledby="brand-toolbox-title">
-    <div class="brand-wrap brand-two-col">
-      <div>
-        <p class="brand-eyebrow">{{ index $toolbox "eyebrow" }}</p>
-        <h2 id="brand-toolbox-title">{{ index $toolbox "title" }}</h2>
-        <p>{{ index $toolbox "description" }}</p>
-      </div>
-      <div class="brand-mini-list">
-        {{ range index $toolbox "items" }}
-        <article>
-          <h3>{{ index . "name" }}</h3>
-          <p>{{ index . "description" }}</p>
-        </article>
-        {{ end }}
-      </div>
-    </div>
-  </section>
-
-  <section class="brand-section brand-contact" aria-labelledby="brand-contact-title">
-    <div class="brand-wrap brand-contact-panel">
-      <div>
-        <p class="brand-eyebrow">{{ index $contact "eyebrow" }}</p>
-        <h2 id="brand-contact-title">{{ index $contact "title" }}</h2>
-        <p>{{ index $contact "description" }}</p>
-      </div>
-      <div class="brand-contact-links">
-        {{ range index $contact "links" }}
-        {{- $url := index . "url" -}}
-        <a href="{{ if hasPrefix $url "http" }}{{ $url }}{{ else }}{{ $url | relLangURL }}{{ end }}">{{ index . "label" }}</a>
-        {{ end }}
-      </div>
-    </div>
-  </section>
+  <aside class="notes-about"><strong>关于这本笔记</strong><p>关注 AI Agent、RAG、模型微调与算子开发。保留实践细节，也记录问题与复盘。</p><a href="https://github.com/artmzhou">GitHub ↗</a><a href="{{ "/index.xml" | relURL }}">RSS 订阅 ↗</a></aside>
 </div>
 {{ end }}

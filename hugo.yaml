@@ -1,5 +1,7 @@
 baseURL: 'https://artmzhou.github.io/'
 languageCode: 'zh-cn'
+defaultContentLanguage: 'zh'
+hasCJKLanguage: true
 title: 'artmzhou'
 theme: 'PaperMod'
 
@@ -15,15 +17,16 @@ minify:
 
 params:
   env: production
+  DateFormat: "2006-01-02"
   title: 'artmzhou'
-  description: '个人技术博客，记录 AI Agent、RAG、Claude Code、模型微调与工程化实践。'
+  description: '个人技术博客，记录 AI Agent、RAG、Claude Code、模型微调、Ascend C 算子开发与工程化实践。'
   keywords: [Blog, Tech, AI, Agent, RAG, Claude Code, Hugo]
   author: 'artmzhou'
 
   assets:
     favicon: /favicon/favicon.ico
-    theme_color: '#ece4d9'
-    msapplication_TileColor: '#ece4d9'
+    theme_color: '#f7f9fc'
+    msapplication_TileColor: '#f7f9fc'
 
   label:
     text: 'artmzhou'
@@ -92,6 +95,11 @@ params:
       title: '把文章整理成可继续生长的主题。'
       description: '先用现有文章搭出专题入口，后续可以逐步长成项目页、工具箱或教程。'
       items:
+        - title: 'Ascend C 算子开发'
+          type: '开发文档'
+          description: '自定义算子的工程生成、Host / Kernel 实现、编译部署与 ACLNN 调用记录。'
+          url: '/tags/ascend-c/'
+          tags: ['Ascend C', 'ACLNN', '算子开发']
         - title: 'RAG 系列'
           type: '专题'
           description: '从数据准备到 SemanticChunker、向量数据库，记录一条 RAG 系统的基础链路。'
@@ -171,6 +179,10 @@ menu:
       name: 专题
       url: /#projects
       weight: 30
+    - identifier: ascend-c
+      name: Ascend C
+      url: /tags/ascend-c/
+      weight: 35
     - identifier: archives
       name: 归档
       url: /archives/
